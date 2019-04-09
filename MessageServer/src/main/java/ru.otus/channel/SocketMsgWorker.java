@@ -53,13 +53,14 @@ public class SocketMsgWorker implements MsgWorker {
         executor.execute(this::receiveMessage);
     }
 
+    //empty line at the end as flag
     private void sendMessage() {
         try (PrintWriter out = new PrintWriter(socket.getOutputStream(), true)) {
             while (socket.isConnected()) {
                 Msg msg = output.take();
                 String json = new Gson().toJson(msg);
                 out.println(json);
-                out.println();//line with json + an empty line
+                out.println();
             }
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
@@ -72,9 +73,8 @@ public class SocketMsgWorker implements MsgWorker {
             StringBuilder stringBuilder = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
                 stringBuilder.append(inputLine);
-                if (inputLine.isEmpty()) { //empty line is the end of the message
+                if (inputLine.isEmpty()) {
                     String json = stringBuilder.toString();
-//                    System.out.println(json);
                     Msg msg = getMsgFromJSON(json);
                     input.add(msg);
                     stringBuilder = new StringBuilder();
