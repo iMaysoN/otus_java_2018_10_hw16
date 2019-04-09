@@ -32,7 +32,7 @@ public class FrontendServiceImpl implements FrontendService {
 
     @Override
     public void getUsers() {
-        socketExecutor.sendMessage(Commands.READ_USERS, "");
+        socketExecutor.sendMessage(Commands.GET_USERS, "");
     }
 
     @Override

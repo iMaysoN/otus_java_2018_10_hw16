@@ -13,16 +13,16 @@ public class MessageController {
     public Msg saveUser(DbService dbService, Msg msg) {
         User user = gson.fromJson(msg.getBody(), User.class);
         dbService.save(user);
-        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.READ_USERS, gson.toJson(dbService.getUsers()));
+        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.GET_USERS, gson.toJson(dbService.getUsers()));
     }
 
-    public Msg readUsers(DbService dbService) {
-        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.READ_USERS, gson.toJson(dbService.getUsers()));
+    public Msg getUsers(DbService dbService) {
+        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.GET_USERS, gson.toJson(dbService.getUsers()));
     }
 
     public Msg deleteUser(DbService dbService, Msg msg) {
         User user = gson.fromJson(msg.getBody(), User.class);
         dbService.deleteUser(user);
-        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.READ_USERS, gson.toJson(dbService.getUsers()));
+        return new Msg(Address.DBSERVER, Address.FRONTEND, Commands.GET_USERS, gson.toJson(dbService.getUsers()));
     }
 }

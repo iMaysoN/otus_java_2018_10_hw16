@@ -44,7 +44,7 @@ public class FrontendSocketExecutor {
     }
 
     private void getUsers(Msg msg) {
-        if (msg.getCommand() == Commands.READ_USERS) {
+        if (msg.getCommand() == Commands.GET_USERS) {
             List<User> users = new Gson().fromJson(msg.getBody(), new TypeToken<List<User>>() {
             }.getType());
             frontendService.sendUsers(users);

@@ -48,7 +48,7 @@ public class DbSocketExecutor {
         } else if (msg.getCommand() == Commands.DELETE_USERS) {
             return msgController.deleteUser(dbService, msg);
         } else {
-            return msgController.readUsers(dbService);
+            return msgController.getUsers(dbService);
         }
     }
 }
